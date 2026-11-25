@@ -1,0 +1,29 @@
+meta {
+  name: Update note
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/api/notes/{{noteId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "patientId": 4,
+    "height": 175,
+    "weight": 70,
+    "isSmoker": false,
+    "hemoglobin": 7.1,
+    "cholesterol": 200.0,
+    "microalbumin": 30.0,
+    "patientNote": "Test note updated from Bruno"
+  }
+}

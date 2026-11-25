@@ -1,0 +1,15 @@
+meta {
+  name: Get all notes
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/notes
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+}

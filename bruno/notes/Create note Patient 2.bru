@@ -1,0 +1,35 @@
+meta {
+  name: Create note Patient 2
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/api/notes
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "patientId": 7,
+    "height": 175,
+    "weight": 70,
+    "isSmoker": false,
+    "hemoglobin": 7.1,
+    "cholesterol": 200.0,
+    "microalbumin": 30.0,
+    "patientNote": "Le patient consulte pour une gêne apparue récemment. Il décrit des épisodes de Vertiges survenant surtout le matin, ainsi que des Palpitations au repos. Il signale des Douleurs thoraciques intermittentes et un Essoufflement à l'effort, même modéré. L'électrocardiogramme montre un tracé Anormal nécessitant des examens complémentaires. Une consultation en cardiologie est programmée."
+  }
+}
+
+script:post-response {
+  if (res.status === 200) {
+    bru.setEnvVar("noteId", res.body.id);
+  }
+}
