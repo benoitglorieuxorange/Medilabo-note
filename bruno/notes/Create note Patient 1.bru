@@ -1,0 +1,35 @@
+meta {
+  name: Create note Patient 1
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/notes
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "patientId": 4,
+    "height": 175,
+    "weight": 70,
+    "isSmoker": false,
+    "hemoglobin": 7.1,
+    "cholesterol": 200.0,
+    "microalbumin": 30.0,
+    "patientNote": "La patiente est suivie depuis plusieurs années. Elle présente une Rechute après une période de rémission de dix-huit mois. Elle rapporte des SueursNocturnes fréquentes, une PerteDePoids de quatre kilos en deux mois et une Fatigue intense. Le dosage des Anticorps est en cours d'analyse. La patiente indique des Allergies médicamenteuses connues. Son traitement actuel comprend des Antidepressifs et des Anticoagulants. Une Vaccination à jour est confirmée. Un nouveau bilan complet est prévu dans quinze jours."
+  }
+}
+
+script:post-response {
+  if (res.status === 200) {
+    bru.setEnvVar("noteId", res.body.id);
+  }
+}

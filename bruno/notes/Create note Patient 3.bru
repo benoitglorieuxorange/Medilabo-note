@@ -1,0 +1,35 @@
+meta {
+  name: Create note Patient 3
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/api/notes
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "patientId": 3,
+    "height": 175,
+    "weight": 70,
+    "isSmoker": false,
+    "hemoglobin": 7.1,
+    "cholesterol": 200.0,
+    "microalbumin": 30.0,
+    "patientNote": "La patiente se présente pour un bilan de routine. Elle ne signale aucun antécédent familial notable. L'examen clinique est globalement satisfaisant. Le bilan sanguin révèle un taux de Cholesterol légèrement élevé. La patiente mentionne également une Fatigue persistante depuis quelques semaines, sans cause évidente. Un suivi alimentaire est recommandé, avec un contrôle dans trois mois."
+  }
+}
+
+script:post-response {
+  if (res.status === 200) {
+    bru.setEnvVar("noteId", res.body.id);
+  }
+}
